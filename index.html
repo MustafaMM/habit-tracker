@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Habit Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <link href="styles.css" rel="stylesheet">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <h1>Habit Tracker</h1>
+    <p>Track your daily habits. Stay consistent.</p>
+  </header>
+
+  <div class="container">
+
+    <!-- ADD HABIT FORM -->
+    <div class="add-form">
+      <input type="text" id="habit-input" placeholder="Add a new habit..." />
+      <button onclick="addHabit()">+ Add</button>
+    </div>
+
+    <!-- SUMMARY STATS -->
+    <div class="summary">
+      <div class="summary-item">
+        <div class="summary-value" id="stat-total">0</div>
+        <div class="summary-label">Total Habits</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value" id="stat-done">0</div>
+        <div class="summary-label">Done Today</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-value" id="stat-pct">0%</div>
+        <div class="summary-label">Completion</div>
+      </div>
+    </div>
+
+    <!-- HABIT LIST -->
+    <div id="habit-list">
+      <div class="empty-state" id="empty-msg">No habits yet. Add one above!</div>
+    </div>
+
+    <!-- RESET DAY -->
+    <div class="reset-row">
+      <button class="reset-btn" onclick="resetDay()">↺ Reset Today</button>
+    </div>
+
+  </div>
+
+</body>
+</html>
