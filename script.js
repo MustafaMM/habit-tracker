@@ -11,19 +11,34 @@
     // ====================================================
     let habits = [];
     let nextId = 1;
+    let streakCounter = 0;
 
-    // ====================================================
-    // addHabit()
-    // Called when the user clicks "+ Add"
-    // TODO:
-    //   1. Read the value from #habit-input
-    //   2. If it's empty, do nothing (or alert the user)
-    //   3. Create a new habit object and push it to habits[]
-    //   4. Clear the input field
-    //   5. Call render()
-    // ====================================================
+    //Called when the user clicks "+ Add"
     function addHabit() {
-      // your code here
+      //Read the value from #habit-input
+      let habit = document.getElementById("habit-input").value;
+      console.log(habit);
+      //If it's empty, do nothing (or alert the user)
+      if(habit === ""){
+        return alert("Enter a habit!");
+      }
+      //Create a new habit object and push it to habits[]
+      let habitObject = {
+        id: nextId++,
+        name: habit,
+        completedToday: false,
+        streak: streakCounter
+      };
+
+      habits.push(habitObject);
+      console.log(habits);
+
+      //Clear the input field
+      document.getElementById("habit-input").value = "";
+      console.log(habit);
+
+      //Call render()
+      render();
     }
 
 
