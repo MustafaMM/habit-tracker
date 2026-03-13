@@ -17,7 +17,7 @@
     function addHabit() {
       //Read the value from #habit-input
       let habit = document.getElementById("habit-input").value;
-      console.log(habit);
+      //console.log(habit);
       //If it's empty, do nothing (or alert the user)
       if(habit === ""){
         return alert("Enter a habit!");
@@ -31,11 +31,11 @@
       };
 
       habits.push(habitObject);
-      console.log(habits);
+      //console.log(habits);
 
       //Clear the input field
       document.getElementById("habit-input").value = "";
-      console.log(habit);
+      //console.log(habit);
 
       //Call render()
       render();
@@ -103,16 +103,6 @@
     // ====================================================
     // render()
     // Redraws the entire habit list and updates the summary
-    // TODO:
-    //   1. Get the #habit-list element
-    //   2. If habits[] is empty, show the #empty-msg div
-    //   3. Otherwise, loop through habits[] and for each one,
-    //      build an HTML string for a .habit-card div
-    //      (use the CSS classes already defined for you)
-    //   4. Set the innerHTML of #habit-list to your built string
-    //   5. Call updateSummary()
-    //
-    // HINT — a habit card looks like this:
     //
     // <div class="habit-card [completed?]">
     //   <button class="check-btn" onclick="toggleHabit(id)">✓</button>
@@ -125,7 +115,39 @@
     // </div>
     // ====================================================
     function render() {
-      // your code here
+      // Get the #habit-list and the #empty-msg elements
+      let habitList = document.getElementById("habit-list");
+      let emptyMsgDiv = document.getElementById("empty-msg");
+      // If habits[] is empty
+      if(habits.length === 0){
+        //show the #empty-msg div
+        emptyMsgDiv.style.display = 'block';
+      } else {
+        // else hide it
+        //emptyMsgDiv.style.display = 'none';
+        // and then, loop through habits[]
+        for(let i = 0; i < habits.length; i++){
+          //and for each one, build an HTML string for a .habit-card div (use the CSS classes already defined for you)
+          let html = "";
+          let classBool;
+          if(habits[i].completedToday)
+            classBool = 'completed'
+
+          html += `<div class="habit-card ${classBool}">
+                      <button class="check-btn" onclick="toggleHabit(id)">✓</button>
+                      <div class="habit-info">
+                        <div class="habit-name">${habits[i].name}</div>
+                        <div class="habit-meta">added today</div>
+                      </div>
+                      <span class="streak">🔥 ${habits[i].streak} days</span>
+                      <button class="delete-btn" onclick="deleteHabit(${habits[i].id})">×</button>
+                    </div>`;
+          //Set the innerHTML of #habit-list to your built string
+          habitList.innerHTML = html;
+          //Call updateSummary()
+          updateSummary();
+        }
+      }
     }
 
 
