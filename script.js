@@ -87,16 +87,27 @@
     // ====================================================
     // updateSummary()
     // Updates the three stat boxes at the top
-    // TODO:
-    //   1. Count total habits
-    //   2. Count how many are completedToday
-    //      Hint: .filter() is great here
-    //   3. Calculate completion % (done / total * 100)
-    //      Handle the case where total is 0 (avoid NaN)
-    //   4. Update the text of #stat-total, #stat-done, #stat-pct
     // ====================================================
     function updateSummary() {
       // your code here
+      //Count total habits
+      let habitsCount = habits.length;
+      console.log(`The length in updateSummary is ${habitsCount}`);
+      //Count how many are completedToday
+      //Hint: .filter() is great here
+      let completedHabits = habits.filter((habit) => habit.completedToday === true);
+      console.log(`The completed habits are ${completedHabits}`);
+      //Calculate completion % (done / total * 100) Handle the case where total is 0 (avoid NaN)
+      if(!(habitsCount === 0)){
+        let completionPercent = (completedHabits.length / habitsCount) * 100;
+      }
+      else{
+        return console.log("Enter habits to start!");
+      }
+      //Update the text of #stat-total, #stat-done, #stat-pct
+      document.getElementById("stat-total").innerHTML = habitsCount;
+      document.getElementById("stat-done").innerHTML = completedHabits.length;
+      document.getElementById("stat-pct").innerHTML = completionPercent;
     }
 
 
@@ -118,6 +129,7 @@
       // Get the #habit-list and the #empty-msg elements
       let habitList = document.getElementById("habit-list");
       let emptyMsgDiv = document.getElementById("empty-msg");
+      let html = "";
       // If habits[] is empty
       if(habits.length === 0){
         //show the #empty-msg div
@@ -128,7 +140,6 @@
         // and then, loop through habits[]
         for(let i = 0; i < habits.length; i++){
           //and for each one, build an HTML string for a .habit-card div (use the CSS classes already defined for you)
-          let html = "";
           let classBool;
           if(habits[i].completedToday)
             classBool = 'completed'
@@ -142,12 +153,12 @@
                       <span class="streak">🔥 ${habits[i].streak} days</span>
                       <button class="delete-btn" onclick="deleteHabit(${habits[i].id})">×</button>
                     </div>`;
-          //Set the innerHTML of #habit-list to your built string
-          habitList.innerHTML = html;
-          //Call updateSummary()
-          updateSummary();
         }
       }
+      //Set the innerHTML of #habit-list to your built string
+      habitList.innerHTML = html;
+      //Call updateSummary()
+      updateSummary();
     }
 
 
