@@ -81,14 +81,16 @@
     // ====================================================
     // resetDay()
     // Called when the user clicks "↺ Reset Today"
-    // TODO:
-    //   1. Loop through all habits
-    //   2. Set each habit's completedToday back to false
-    //      (streaks stay as-is — they were already counted)
-    //   3. Call render()
     // ====================================================
     function resetDay() {
-      // your code here
+      // Loop through all habits
+      habits.forEach(habit => {
+        //Set each habit's completedToday back to false (streaks stay as-is — they were already counted)
+        habit.completedToday = false;
+      });
+
+      // Call render()
+      render();
     }
 
 
