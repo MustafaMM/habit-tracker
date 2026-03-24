@@ -45,15 +45,23 @@
     // ====================================================
     // toggleHabit(id)
     // Called when the user clicks the circle check button
-    // TODO:
-    //   1. Find the habit in habits[] with the matching id
-    //   2. Flip its completedToday value (true → false, false → true)
-    //   3. If completing it, increment its streak
-    //   4. If un-completing it, decrement its streak (min 0)
-    //   5. Call render()
     // ====================================================
     function toggleHabit(id) {
-      // your code here
+      // Find the habit in habits[] with the matching id
+      for(let i = 0; i < habits.length; i++){
+        if(habits[i].id === id){
+          //Flip its completedToday value (true → false, false → true)
+          habits[i].completedToday = !habits[i].completedToday;
+          //If completing it, increment its streak
+          if(habits[i].completedToday)
+            habits[i].streak++;
+          else //If un-completing it, decrement its streak (min 0)
+            habits[i].streak--;
+        }
+      }
+
+      //Call render()
+      render();
     }
 
 
@@ -92,14 +100,15 @@
       // your code here
       //Count total habits
       let habitsCount = habits.length;
-      console.log(`The length in updateSummary is ${habitsCount}`);
+      //--------------------console.log(`The length in updateSummary is ${habitsCount}`);
       //Count how many are completedToday
       //Hint: .filter() is great here
       let completedHabits = habits.filter((habit) => habit.completedToday === true);
-      console.log(`The completed habits are ${completedHabits}`);
+      //---------------------console.log(`The completed habits are ${completedHabits}`);
       //Calculate completion % (done / total * 100) Handle the case where total is 0 (avoid NaN)
       if(!(habitsCount === 0)){
         let completionPercent = (completedHabits.length / habitsCount) * 100;
+        document.getElementById("stat-pct").innerHTML = completionPercent;
       }
       else{
         return console.log("Enter habits to start!");
@@ -107,7 +116,6 @@
       //Update the text of #stat-total, #stat-done, #stat-pct
       document.getElementById("stat-total").innerHTML = habitsCount;
       document.getElementById("stat-done").innerHTML = completedHabits.length;
-      document.getElementById("stat-pct").innerHTML = completionPercent;
     }
 
 
@@ -145,7 +153,7 @@
             classBool = 'completed'
 
           html += `<div class="habit-card ${classBool}">
-                      <button class="check-btn" onclick="toggleHabit(id)">✓</button>
+                      <button class="check-btn" onclick="toggleHabit(${habits[i].id})">✓</button>
                       <div class="habit-info">
                         <div class="habit-name">${habits[i].name}</div>
                         <div class="habit-meta">added today</div>
