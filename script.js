@@ -68,13 +68,12 @@
     // ====================================================
     // deleteHabit(id)
     // Called when the user clicks the × button
-    // TODO:
-    //   1. Remove the habit with the matching id from habits[]
-    //      Hint: look up the .filter() iterator method
-    //   2. Call render()
     // ====================================================
     function deleteHabit(id) {
-      // your code here
+      // Remove the habit with the matching id from habits[]. Hint: look up the .filter() iterator method
+      habits = habits.filter((habit) => habit.id !== id);
+      // Call render()
+      render();
     }
 
 
